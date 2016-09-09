@@ -59,3 +59,6 @@ If you have used the program FamiTracker before, the keyboard layout as far as n
 
 Changing note length and exiting program are the same as when Playmode is off. You will not be able to switch octaves 
 while it is on.
+
+## Credits (aside from myself)
+- Frequency calculations for this program: http://www.phy.mtu.edu/~suits/NoteFreqCalcs.html
