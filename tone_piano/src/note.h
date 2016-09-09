@@ -1,6 +1,9 @@
 #ifndef NOTE_H
 #define NOTE_H
 
+#include <math.h>
+#include <windows.h>
+
 // Frequency of note A4.
 const double BASE_FREQUENCY = 440;
 // Base value for which the semitone difference from the base frequency will serve as the exponent (2 ^ 1/12).
