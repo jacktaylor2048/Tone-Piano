@@ -2,7 +2,8 @@
 // Constructor.
 Note::Note()
 {
-
+	note = 0;
+	frequency = 0;
 }
 
 // Play this note.
