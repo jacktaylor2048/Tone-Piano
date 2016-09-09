@@ -54,5 +54,6 @@ void Note::set_note(char key)
 	else if (key == 'p') note = 19;
 	else if (key == '[') note = 20;
 	else if (key == ']') note = 21;
-	else note = -BASE_NOTE_DIFF - 1; // Prevent note from playing
+	// Prevent note from playing
+	else note = -BASE_NOTE_DIFF - 1;
 }
