@@ -9,12 +9,15 @@ const unsigned char DEFAULT_NOTELENGTH = 150;
 // Clear console
 void clear()
 {
-
+	DWORD n;
+	FillConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), TEXT(' '), 1024, {0}, &n);
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), {0});
 }
 
 // Draw to console
 void draw(bool& redraw, bool& playmode, char& octave, char& notelength)
 {
+	clear();
 	if (redraw)
 	{
 		std::cout << "\n\n                   Tone Piano 1.0 by Jack Taylor\n\n\n";
