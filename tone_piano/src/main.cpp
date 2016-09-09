@@ -5,6 +5,7 @@
 const int CONSOLE_WIDTH = 64;
 const int CONSOLE_HEIGHT = 16;
 const unsigned char DEFAULT_NOTELENGTH = 150;
+const char ESCAPE_KEY = 27;
 
 // Clear console
 void clear()
@@ -15,7 +16,7 @@ void clear()
 }
 
 // Draw to console
-void draw(bool& redraw, bool& playmode, char& octave, char& notelength)
+void draw(bool& redraw, bool& playmode, char& octave, unsigned char& notelength)
 {
 	clear();
 	if (redraw)
@@ -55,5 +56,58 @@ int main()
 	COORD buffer = {CONSOLE_WIDTH, CONSOLE_HEIGHT};
 	SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), TRUE, &window);
 	SetConsoleScreenBufferSize(GetStdHandle(STD_OUTPUT_HANDLE), buffer);
+	while (key != ESCAPE_KEY)
+	{
+		draw(redraw, playmode, octave, notelength);
+		Note cur_note;
+		// Playmode OFF. Notes cannot be played, but octave can be configured.
+		if (!playmode)
+		{
+			key = _getch();
+			// Octaves
+			if (key == '1') octave = 1;
+			else if (key == '2') octave = 2;
+			else if (key == '3') octave = 3;
+			else if (key == '4') octave = 4;
+			else if (key == '5') octave = 5;
+			else if (key == '6') octave = 6;
+			else if (key == '7') octave = 7;
+			// Note length configuration
+			else if (key == '-' && notelength > 10) notelength -= 5;
+			else if (key == '=' && notelength < 255) notelength += 5;
+			// Space toggles playmode
+			else if (key == ' ') playmode = true;
+			redraw = true;
+			// Play random note (does not require console redraw)
+			if (key == '8')
+			{
+				cur_note.set_note();
+				cur_note.play(octave, notelength);
+				redraw = false;
+			}
+		}
+		// Playmode ON. Notes can be played, but octave cannot be configured.
+		else
+		{
+			key = _getch();
+			if (key == '-' && notelength > 10)
+			{
+				notelength -= 5;
+				redraw = true;
+			}
+			else if (key == '=' && notelength < 255)
+			{
+				notelength += 5;
+				redraw = true;
+			}
+			else if (key == ' ')
+			{
+				playmode = false;
+				redraw = true;
+			}
+			cur_note.set_note(key);
+			cur_note.play(octave, notelength);
+		}
+	}
 	return 0;
 }
