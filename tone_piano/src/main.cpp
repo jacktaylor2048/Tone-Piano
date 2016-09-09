@@ -5,6 +5,8 @@
 const int CONSOLE_WIDTH = 64;
 const int CONSOLE_HEIGHT = 16;
 const unsigned char DEFAULT_NOTELENGTH = 150;
+const unsigned char MIN_NOTELENGTH = 10;
+const unsigned char MAX_NOTELENGTH = 255;
 const char ESCAPE_KEY = 27;
 
 // Clear console
@@ -56,6 +58,7 @@ int main()
 	COORD buffer = {CONSOLE_WIDTH, CONSOLE_HEIGHT};
 	SetConsoleWindowInfo(GetStdHandle(STD_OUTPUT_HANDLE), TRUE, &window);
 	SetConsoleScreenBufferSize(GetStdHandle(STD_OUTPUT_HANDLE), buffer);
+	// Main loop
 	while (key != ESCAPE_KEY)
 	{
 		draw(redraw, playmode, octave, notelength);
@@ -73,8 +76,8 @@ int main()
 			else if (key == '6') octave = 6;
 			else if (key == '7') octave = 7;
 			// Note length configuration
-			else if (key == '-' && notelength > 10) notelength -= 5;
-			else if (key == '=' && notelength < 255) notelength += 5;
+			else if (key == '-' && notelength > MIN_NOTELENGTH) notelength -= 5;
+			else if (key == '=' && notelength < MAX_NOTELENGTH) notelength += 5;
 			// Space toggles playmode
 			else if (key == ' ') playmode = true;
 			redraw = true;
@@ -90,12 +93,12 @@ int main()
 		else
 		{
 			key = _getch();
-			if (key == '-' && notelength > 10)
+			if (key == '-' && notelength > MIN_NOTELENGTH)
 			{
 				notelength -= 5;
 				redraw = true;
 			}
-			else if (key == '=' && notelength < 255)
+			else if (key == '=' && notelength < MAX_NOTELENGTH)
 			{
 				notelength += 5;
 				redraw = true;
