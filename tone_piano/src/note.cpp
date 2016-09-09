@@ -11,7 +11,7 @@ void Note::play(char& octave, unsigned char& notelength)
 {
 	int note_diff = note + ((octave - BASE_OCTAVE) * NOTES_PER_OCTAVE);
 	frequency = BASE_FREQUENCY * pow(BASE_MULTIPLIER, note_diff);
-	Beep(static_cast<int>(frequency), notelength);
+	if (note >= -BASE_NOTE_DIFF) Beep(static_cast<int>(frequency), notelength);
 }
 
 // Set a random note.
@@ -54,4 +54,5 @@ void Note::set_note(char key)
 	else if (key == 'p') note = 19;
 	else if (key == '[') note = 20;
 	else if (key == ']') note = 21;
+	else note = -BASE_NOTE_DIFF - 1; // Prevent note from playing
 }
