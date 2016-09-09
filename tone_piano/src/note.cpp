@@ -9,7 +9,9 @@ Note::Note()
 // Play this note.
 void Note::play(char& octave, unsigned char& notelength)
 {
-
+	int note_diff = note + ((octave - BASE_OCTAVE) * NOTES_PER_OCTAVE);
+	frequency = BASE_FREQUENCY * pow(BASE_MULTIPLIER, note_diff);
+	Beep(static_cast<int>(frequency), notelength);
 }
 
 // Set a random note.

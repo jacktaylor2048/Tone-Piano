@@ -12,6 +12,8 @@ const double BASE_MULTIPLIER = 1.059463;
 const int NOTES_PER_CONFIG = 31;
 // Semitone difference between base note (A) and lowest note for a configuration (C)
 const int BASE_NOTE_DIFF = 9;
+const int BASE_OCTAVE = 4;
+const int NOTES_PER_OCTAVE = 12;
 
 /*
  * A single Note. This will be created when the user presses a key in play mode, 
