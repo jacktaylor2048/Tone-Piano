@@ -18,10 +18,10 @@ void clear()
 // Draw to console
 void draw(bool& redraw, bool& playmode, char& octave, unsigned char& notelength)
 {
-	clear();
 	if (redraw)
 	{
-		std::cout << "\n\n                   Tone Piano 1.0 by Jack Taylor\n\n\n";
+		clear();
+		std::cout << "\n\n                  Tone Piano 1.0 by Jack Taylor\n\n\n";
 		if (!playmode)
 		{
 			std::cout << "        1 - 7: Set Octave             8: Random Note\n\n";
@@ -105,8 +105,11 @@ int main()
 				playmode = false;
 				redraw = true;
 			}
-			cur_note.set_note(key);
-			cur_note.play(octave, notelength);
+			else
+			{
+				cur_note.set_note(key);
+				cur_note.play(octave, notelength);
+			}
 		}
 	}
 	return 0;
