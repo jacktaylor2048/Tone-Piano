@@ -15,7 +15,7 @@ void Note::play(char& octave, unsigned char& notelength)
 // Set a random note.
 void Note::set_note()
 {
-	note = (rand() % 31) - 9;
+	note = (rand() % NOTES_PER_CONFIG) - BASE_NOTE_DIFF;
 }
 
 // Set a specific note based on key press.
