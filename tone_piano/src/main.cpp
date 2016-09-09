@@ -1,4 +1,5 @@
 #include <conio.h>
+#include <iostream>
 #include "note.h"
 
 const int CONSOLE_WIDTH = 64;
@@ -12,9 +13,28 @@ void clear()
 }
 
 // Draw to console
-void draw(bool& redraw)
+void draw(bool& redraw, bool& playmode, char& octave, char& notelength)
 {
-
+	if (redraw)
+	{
+		std::cout << "\n\n                   Tone Piano 1.0 by Jack Taylor\n\n\n";
+		if (!playmode)
+		{
+			std::cout << "        1 - 7: Set Octave             8: Random Note\n\n";
+			std::cout << "        -: Note length - 5            +: Note length + 5\n\n";
+			std::cout << "        Octave: " << static_cast<int>(octave) << "                     Note Length: " << static_cast<int>(notelength) << "ms\n\n";
+			std::cout << "             SPACE: Toggle play mode (Currently OFF)\n\n";
+		}
+		else
+		{
+			std::cout << "               Octave cannot be set while playing.\n\n";
+			std::cout << "        -: Note length - 5            +: Note length + 5\n\n";
+			std::cout << "        Octave: " << static_cast<int>(octave) << "                     Note Length: " << static_cast<int>(notelength) << "ms\n\n";
+			std::cout << "             SPACE: Toggle play mode (Currently ON)\n\n";
+		}
+		std::cout << "                       ESC: Exit program";
+		redraw = false;
+	}
 }
 
 // Main function
